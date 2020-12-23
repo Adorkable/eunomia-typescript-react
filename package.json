@@ -1,6 +1,6 @@
 {
   "name": "@adorkable/eunomia-typescript-react",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The team's go-to utilities for Typescript and React, named for the Greek goddess of green pastures, law and legislation",
   "scripts": {
     "prepare": "npm run build; npm run build-storybook; # npm run test",
