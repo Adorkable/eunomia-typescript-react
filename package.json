@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "The team's go-to utilities for Typescript and React, named for the Greek goddess of green pastures, law and legislation",
   "scripts": {
-    "prepare": "npm run build; # npm run test",
+    "prepare": "npm run build; npm run build-storybook; # npm run test",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test": "jest",
