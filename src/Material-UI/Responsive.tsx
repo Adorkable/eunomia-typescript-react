@@ -1,21 +1,21 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactChild } from 'react'
 
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import json2mq from 'json2mq'
 
-type OptionalRenderingChildren =
-  | React.ReactChild
-  | Array<React.ReactChild>
-  | (() => React.ReactChild | Array<React.ReactChild>)
+export type OptionalRenderingChildren =
+  | ReactChild
+  | Array<ReactChild>
+  | (() => ReactChild | Array<ReactChild>)
 
-type ResponsiveProps = {
+export type ResponsiveProps = {
   minWidth?: number | string
   maxWidth?: number | string
 
   children: OptionalRenderingChildren
 }
 
-const Responsive = (props: ResponsiveProps) => {
+export const Responsive = (props: ResponsiveProps) => {
   const match = useMediaQuery(
     json2mq({
       minWidth: props.minWidth || false,
@@ -23,7 +23,7 @@ const Responsive = (props: ResponsiveProps) => {
     })
   )
   if (match) {
-    let children: React.ReactChild | Array<React.ReactChild>
+    let children: ReactChild | Array<ReactChild>
     if (typeof props.children === 'function') {
       children = props.children()
     } else {

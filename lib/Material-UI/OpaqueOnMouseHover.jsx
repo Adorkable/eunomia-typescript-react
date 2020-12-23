@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OpaqueOnMouseHover = void 0;
 const react_1 = require("react");
 const styles_1 = require("@material-ui/core/styles");
 const useStyles = styles_1.makeStyles((theme) => ({
@@ -17,7 +18,7 @@ const useStyles = styles_1.makeStyles((theme) => ({
     }
 }));
 const OpaqueOnMouseHover = (props) => {
-    const [hovered, setHovered] = react_1.default.useState(false);
+    const [hovered, setHovered] = react_1.useState(false);
     const handleMouseEnter = () => {
         setHovered(true);
     };
@@ -29,4 +30,5 @@ const OpaqueOnMouseHover = (props) => {
       {props.children}
     </div>);
 };
-exports.default = OpaqueOnMouseHover;
+exports.OpaqueOnMouseHover = OpaqueOnMouseHover;
+exports.default = exports.OpaqueOnMouseHover;

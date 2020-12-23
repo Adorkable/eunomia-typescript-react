@@ -1,22 +1,23 @@
-import React from 'react'
+import { Fragment, ReactNode, useEffect, useState } from 'react'
 
 export interface Props<ValueType> {
-    initialValue: ValueType
+  initialValue: ValueType
 
-    child: (value: ValueType, setValue: (newValue: ValueType) => void) => React.ReactNode
+  child: (
+    value: ValueType,
+    setValue: (newValue: ValueType) => void
+  ) => ReactNode
 }
 
 export const StateHolder = <ValueType extends any>(props: Props<ValueType>) => {
-    const { initialValue } = props
-    const [value, setValue] = React.useState<ValueType>(initialValue)
-    
-    React.useEffect(() => {
-        setValue(initialValue)
-    }, [initialValue])
+  const { initialValue } = props
+  const [value, setValue] = useState<ValueType>(initialValue)
 
-        return <React.Fragment>
-            {props.child(value, setValue)}
-        </React.Fragment>
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
+
+  return <Fragment>{props.child(value, setValue)}</Fragment>
 }
 
 export default StateHolder

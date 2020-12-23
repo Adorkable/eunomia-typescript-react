@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.IconCollapsablePanel = void 0;
 const react_1 = require("react");
 const OpaqueOnMouseHover_1 = require("./OpaqueOnMouseHover");
 const core_1 = require("@material-ui/core");
@@ -30,7 +31,7 @@ const useStyles = core_1.makeStyles((theme) => ({
     }
 }));
 const IconCollapsablePanel = (props) => {
-    const [expanded, setExpanded] = react_1.default.useState(false);
+    const [expanded, setExpanded] = react_1.useState(false);
     const handleExpandToggled = () => {
         setExpanded(!expanded);
     };
@@ -62,4 +63,5 @@ const IconCollapsablePanel = (props) => {
       </core_1.Card>
     </OpaqueOnMouseHover_1.default>);
 };
-exports.default = IconCollapsablePanel;
+exports.IconCollapsablePanel = IconCollapsablePanel;
+exports.default = exports.IconCollapsablePanel;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactChild, useState } from 'react'
 
 import OpaqueOnMouseHover from './OpaqueOnMouseHover'
 
@@ -13,9 +13,9 @@ export type Props = {
   'aria-label': string
   icon: (
     color: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error'
-  ) => React.ReactChild
+  ) => ReactChild
 
-  children: React.ReactChild | Array<React.ReactChild>
+  children: ReactChild | Array<ReactChild>
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const IconCollapsablePanel = (props: Props) => {
-  const [expanded, setExpanded] = React.useState(false)
+export const IconCollapsablePanel = (props: Props) => {
+  const [expanded, setExpanded] = useState(false)
 
   const handleExpandToggled = () => {
     setExpanded(!expanded)

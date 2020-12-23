@@ -1,5 +1,13 @@
 // TODO: this can exist in `eunomia-typescript`
-import { Group, BoxGeometry, MeshBasicMaterial, Mesh, Box2, WebGLRenderer, Scene } from 'three'
+import {
+  Group,
+  BoxGeometry,
+  MeshBasicMaterial,
+  Mesh,
+  Box2,
+  WebGLRenderer,
+  Scene
+} from 'three'
 
 export const createAxisGeometry = (): Group => {
   const boxGeometry = new BoxGeometry()

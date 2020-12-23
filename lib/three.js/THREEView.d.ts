@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ViewportSize, SizeProperties } from './Types';
 import { WebGLRenderer, Vector2, Box2 } from 'three';
 export declare type Props = {
@@ -18,5 +18,5 @@ export interface THREEViewHandlers {
 export declare const SizePropertiesDefault: ViewportSize;
 export declare const ContainerReferenceNotAvailableError = "Container reference not available";
 export declare const RendererNotAvailableError = "Renderer not available";
-export declare const THREEView: import("react").ForwardRefExoticComponent<Props & import("react").RefAttributes<THREEViewHandlers>>;
+export declare const THREEView: React.ForwardRefExoticComponent<Props & React.RefAttributes<THREEViewHandlers>>;
 export default THREEView;

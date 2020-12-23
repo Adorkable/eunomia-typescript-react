@@ -1,4 +1,4 @@
-import {
+import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
@@ -44,7 +44,8 @@ export const SizePropertiesDefault: ViewportSize = {
   viewportSize: 10
 }
 
-export const ContainerReferenceNotAvailableError = 'Container reference not available'
+export const ContainerReferenceNotAvailableError =
+  'Container reference not available'
 export const RendererNotAvailableError = 'Renderer not available'
 
 export const THREEView = forwardRef<THREEViewHandlers, Props>(

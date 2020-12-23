@@ -14,22 +14,13 @@ const SliderView = (props) => {
             onChange(newValue);
         }
     };
-    // const marks = [
-    //   {
-    //     value:
-    //   }
-    // ]
-    // marks[`${minimum}`] = minimum
-    // marks[`${maximum}`] = maximum
     return (<div style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
     }}>
       <Typography_1.default>{value.toFixed(2)}</Typography_1.default>
-      <Slider_1.default value={value} min={minimum} max={maximum} 
-    // marks={marks}
-    onChange={onChangeWrapper}/>
+      <Slider_1.default value={value} min={minimum} max={maximum} onChange={onChangeWrapper}/>
     </div>);
 };
 exports.SliderView = SliderView;

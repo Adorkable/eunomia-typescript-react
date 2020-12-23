@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mobile = exports.Tablet = exports.Desktop = void 0;
+exports.Mobile = exports.Tablet = exports.Desktop = exports.Responsive = void 0;
 const react_1 = require("react");
 const useMediaQuery_1 = require("@material-ui/core/useMediaQuery");
 const json2mq_1 = require("json2mq");
@@ -21,10 +21,11 @@ const Responsive = (props) => {
     }
     return null;
 };
-const Desktop = (props) => (<Responsive minWidth={1025} children={props.children}/>);
+exports.Responsive = Responsive;
+const Desktop = (props) => (<exports.Responsive minWidth={1025} children={props.children}/>);
 exports.Desktop = Desktop;
-const Tablet = (props) => (<Responsive minWidth={768} maxWidth={1024} children={props.children}/>);
+const Tablet = (props) => (<exports.Responsive minWidth={768} maxWidth={1024} children={props.children}/>);
 exports.Tablet = Tablet;
-const Mobile = (props) => (<Responsive maxWidth={767} children={props.children}/>);
+const Mobile = (props) => (<exports.Responsive maxWidth={767} children={props.children}/>);
 exports.Mobile = Mobile;
-exports.default = Responsive;
+exports.default = exports.Responsive;

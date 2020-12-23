@@ -1,7 +1,6 @@
-// TODO: mostly untested :P
 import { useEffect, useState } from 'react'
 
-interface Props {
+export interface Props {
   key: string
 
   defaultValue?: string | null

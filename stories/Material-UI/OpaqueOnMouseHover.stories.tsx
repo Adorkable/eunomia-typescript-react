@@ -1,28 +1,25 @@
 import React from 'react'
 
-import { Story, Meta } from '@storybook/react/types-6-0';
+import { Meta } from '@storybook/react/types-6-0'
 
-import OpaqueOnMouseHover from '../../src/Material-UI/OpaqueOnMouseHover'
+import { MaterialUI } from '../../src/'
+const { OpaqueOnMouseHover } = MaterialUI
 
 export default {
   title: 'Material-UI/OpaqueOnMouseHover',
-  component: OpaqueOnMouseHover,
-} as Meta;
+  component: OpaqueOnMouseHover
+} as Meta
 
 export const OneChild = () => {
-    return (
-        <OpaqueOnMouseHover>
-            This is a test
-        </OpaqueOnMouseHover>
-    )
+  return <OpaqueOnMouseHover>This is a test</OpaqueOnMouseHover>
 }
 
 export const ManyChildren = () => {
-    return (
-        <OpaqueOnMouseHover>
-            This is a test
-            <div>I'm inna divvv</div>
-            <span>I'm inna span</span>
-        </OpaqueOnMouseHover>
-    )
+  return (
+    <OpaqueOnMouseHover>
+      This is a test
+      <div>I'm inna divvv</div>
+      <span>I'm inna span</span>
+    </OpaqueOnMouseHover>
+  )
 }

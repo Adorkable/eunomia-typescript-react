@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, ReactChild } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
 export type Props = {
-  children: React.ReactChild | Array<React.ReactChild>
+  children: ReactChild | Array<ReactChild>
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const OpaqueOnMouseHover = (props: Props) => {
-  const [hovered, setHovered] = React.useState(false)
+export const OpaqueOnMouseHover = (props: Props) => {
+  const [hovered, setHovered] = useState(false)
 
   const handleMouseEnter = () => {
     setHovered(true)

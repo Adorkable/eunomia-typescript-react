@@ -1,5 +1,5 @@
 /// <reference types="react" />
-declare type Props = {
+export declare type Props = {
     value: number;
     minimum: number;
     maximum: number;

@@ -1,29 +1,27 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { Meta } from '@storybook/react/types-6-0'
 
-import THREEView, {
+import { threejs } from '../../src/'
+const {
+  THREEView,
   SizePropertiesDefault,
-  THREEViewHandlers
-} from '../../src/three.js/THREEView'
-import {
   createAxisGeometry,
   createBounds2DGeometry
-} from '../../src/three.js/Debug'
+} = threejs
+
 import { Box2, PerspectiveCamera, Scene, Vector2 } from 'three'
-import {
-  FitWindowSize,
-  FixedSize,
-  SizeProperties,
-  ViewportSize
-} from '../../src/three.js/Types'
 
 export default {
   title: 'three.js/THREEView',
   component: THREEView
 } as Meta
 
-export const DefaultSizeProperties = ({ size }: { size: SizeProperties }) => {
+export const DefaultSizeProperties = ({
+  size
+}: {
+  size: threejs.SizeProperties
+}) => {
   var frameRequest: number = -1
 
   const camera = new PerspectiveCamera(
@@ -46,17 +44,17 @@ export const DefaultSizeProperties = ({ size }: { size: SizeProperties }) => {
   scene.add(bounds)
 
   const initialValue: {
-    ref: THREEViewHandlers | undefined
+    ref: threejs.THREEViewHandlers | undefined
     threejsSetup: boolean
   } = {
     ref: undefined,
     threejsSetup: false
   }
 
-  const ref = React.useRef<THREEViewHandlers>(null)
-  const [threejsSetup, setThreejsSetup] = React.useState(false)
+  const ref = useRef<threejs.THREEViewHandlers>(null)
+  const [threejsSetup, setThreejsSetup] = useState(false)
 
-  const startRenders = (_threeView: THREEViewHandlers) => {
+  const startRenders = (_threeView: threejs.THREEViewHandlers) => {
     stopRenders()
 
     animate()
@@ -88,7 +86,7 @@ export const DefaultSizeProperties = ({ size }: { size: SizeProperties }) => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!threejsSetup || !ref.current) {
       return
     }
@@ -96,7 +94,7 @@ export const DefaultSizeProperties = ({ size }: { size: SizeProperties }) => {
     startRenders(ref.current)
   }, [ref.current, threejsSetup])
 
-  React.useEffect(() => {
+  useEffect(() => {
     return stopRenders
   }, [])
 
@@ -114,8 +112,14 @@ DefaultSizeProperties.args = {
   size: SizePropertiesDefault
 }
 
-export const FixedSizeProperties = ({ width, height }: {width: number, height: number}) => {
-  const fixedSize: FixedSize = {
+export const FixedSizeProperties = ({
+  width,
+  height
+}: {
+  width: number
+  height: number
+}) => {
+  const fixedSize: threejs.FixedSize = {
     kind: 'FixedSize',
     width,
     height
@@ -127,8 +131,12 @@ FixedSizeProperties.args = {
   height: 10
 }
 
-export const ViewPortSizeProperties = ({ viewportSize }: {viewportSize:number}) => {
-  const viewportSizeProperty: ViewportSize = {
+export const ViewPortSizeProperties = ({
+  viewportSize
+}: {
+  viewportSize: number
+}) => {
+  const viewportSizeProperty: threejs.ViewportSize = {
     kind: 'ViewportSize',
     viewportSize
   }
@@ -142,10 +150,10 @@ export const FitWindowSizeProperties = ({
   pixelsPerWindowPixel,
   resizeRendererToFit
 }: {
-        pixelsPerWindowPixel: number,
-    resizeRendererToFit: boolean
+  pixelsPerWindowPixel: number
+  resizeRendererToFit: boolean
 }) => {
-  const size: FitWindowSize = {
+  const size: threejs.FitWindowSize = {
     kind: 'FitWindowSize',
     pixelsPerWindowPixel,
     resizeRendererToFit

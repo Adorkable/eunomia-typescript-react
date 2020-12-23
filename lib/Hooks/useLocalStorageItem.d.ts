@@ -1,4 +1,4 @@
-interface Props {
+export interface Props {
     key: string;
     defaultValue?: string | null;
     localChangeCheckSeconds?: number | undefined;

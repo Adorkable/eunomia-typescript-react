@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DebugMenu = void 0;
 const react_1 = require("react");
 const IconCollapsablePanel_1 = require("./IconCollapsablePanel");
 const core_1 = require("@material-ui/core");
@@ -33,7 +34,7 @@ const renderModalViewIconContents = (modalView) => {
     return null;
 };
 const DebugMenu = (props) => {
-    const [openModalView, setOpenModalView] = react_1.default.useState(undefined);
+    const [openModalView, setOpenModalView] = react_1.useState(undefined);
     const handleClose = () => {
         setOpenModalView(undefined);
     };
@@ -88,4 +89,5 @@ const DebugMenu = (props) => {
       </div>
     </IconCollapsablePanel_1.default>);
 };
-exports.default = DebugMenu;
+exports.DebugMenu = DebugMenu;
+exports.default = exports.DebugMenu;

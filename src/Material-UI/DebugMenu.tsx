@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties, ReactElement, useState } from 'react'
 
 import IconCollapsablePanel from './IconCollapsablePanel'
 
@@ -11,7 +11,7 @@ export type ModalView = {
   materialIcon?: string
   fontAwesomeIcon?: string
 
-  modalView: React.ReactElement<any>
+  modalView: ReactElement<any>
 }
 
 export type Props = {
@@ -48,10 +48,10 @@ const renderModalViewIconContents = (modalView: ModalView) => {
   return null
 }
 
-const DebugMenu = (props: Props) => {
-  const [openModalView, setOpenModalView] = React.useState<
-    ModalView | undefined
-  >(undefined)
+export const DebugMenu = (props: Props) => {
+  const [openModalView, setOpenModalView] = useState<ModalView | undefined>(
+    undefined
+  )
 
   const handleClose = () => {
     setOpenModalView(undefined)
@@ -76,7 +76,7 @@ const DebugMenu = (props: Props) => {
   }
 
   const renderModalViewToggle = (modalView: ModalView) => {
-    const style: React.CSSProperties = {
+    const style: CSSProperties = {
       display: 'flex',
       flexDirection: 'row',
       alignContent: 'flex-start',
@@ -101,7 +101,7 @@ const DebugMenu = (props: Props) => {
 
   const { modalViews } = props
 
-  const linkStyle: React.CSSProperties = {
+  const linkStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'row',
     alignContent: 'flex-start',
