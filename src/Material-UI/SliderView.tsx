@@ -16,7 +16,7 @@ export const SliderView = (props: Props) => {
   const { value, minimum, maximum, onChange } = props
 
   const onChangeWrapper = (
-    event: ChangeEvent<{}>,
+    _event: ChangeEvent<{}>,
     newValue: number | number[]
   ) => {
     if (Array.isArray(newValue)) {
