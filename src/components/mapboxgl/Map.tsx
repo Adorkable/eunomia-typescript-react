@@ -1,6 +1,7 @@
 import mapboxgl, { LngLat } from 'mapbox-gl'
 import React, {
   MutableRefObject,
+  RefObject,
   useCallback,
   useEffect,
   useRef,
@@ -31,6 +32,8 @@ interface Props {
     | React.ReactElement<MarkerMethods | typeof Line>
     | Array<React.ReactElement<MarkerMethods | typeof Line>>
     | undefined
+
+  mapboxMapRef?: (marker: RefObject<mapboxgl.Map | undefined>) => void
 }
 
 export const Map = ({
@@ -43,7 +46,8 @@ export const Map = ({
   zoomMinMax,
   style = 'mapbox://styles/mapbox/streets-v11',
   showLocation = false,
-  children
+  children,
+  mapboxMapRef
 }: Props): React.ReactElement => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map: MutableRefObject<mapboxgl.Map | null> =
@@ -86,6 +90,10 @@ export const Map = ({
             ]
           : undefined
     })
+
+    if (mapboxMapRef) {
+      mapboxMapRef(map)
+    }
   })
 
   const onClick = useCallback(() => {

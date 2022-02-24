@@ -20,9 +20,10 @@ export interface Props {
   popup?: React.ReactElement | undefined
   // eslint-disable-next-line no-unused-vars
   onClick?: (event: MouseEvent) => void
-  mapboxMarkerRef?: (marker: RefObject<mapboxgl.Marker | undefined>) => void
 
   children?: React.ReactElement | undefined
+
+  mapboxMarkerRef?: (marker: RefObject<mapboxgl.Marker | undefined>) => void
 }
 
 export interface MarkerMethods {
@@ -35,8 +36,8 @@ export const Marker = ({
   location,
   popup,
   onClick,
-  mapboxMarkerRef,
-  children
+  children,
+  mapboxMarkerRef
 }: Props) => {
   const context = useContext(MapContext)
   const { map } = context
