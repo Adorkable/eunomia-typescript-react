@@ -19,7 +19,7 @@ export const LocationInformationDialog = ({
   showMouse,
   mouseLongitude,
   mouseLatitude,
-  showForCode,
+  showForCode
 }: Props): React.ReactElement => {
   return (
     <div
@@ -34,21 +34,29 @@ export const LocationInformationDialog = ({
         top: 0,
         left: 0,
         margin: 12,
-        borderRadius: 4,
+        borderRadius: 4
       }}
     >
       <div>
         <div>
           Longitude: {longitude} | Latitude: {latitude} | Zoom: {zoom}
         </div>
-        <div>{showForCode ? `- {"longitude": ${longitude}, "latitude": ${latitude}}` : null}</div>
+        <div>
+          {showForCode
+            ? `- {"longitude": ${longitude}, "latitude": ${latitude}}`
+            : null}
+        </div>
       </div>
       {showMouse ? (
         <div>
           <div>
             Mouse ~ Longitude: {mouseLongitude} | Latitude: {mouseLatitude}
           </div>
-          <div>{showForCode ? `- {"longitude": ${mouseLongitude}, "latitude": ${mouseLatitude}}` : null}</div>
+          <div>
+            {showForCode
+              ? `- {"longitude": ${mouseLongitude}, "latitude": ${mouseLatitude}}`
+              : null}
+          </div>
         </div>
       ) : null}
     </div>

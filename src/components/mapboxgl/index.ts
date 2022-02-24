@@ -1,3 +1,5 @@
 export { Map } from './Map'
 export { Marker } from './Marker'
 export { Line } from './Line'
+export { MapContext } from './MapContext'
+export * from './Utility'

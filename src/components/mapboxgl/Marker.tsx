@@ -7,7 +7,7 @@ import React, {
   useState
 } from 'react'
 import ReactDOM from 'react-dom'
-import { MapContext } from './Utility/MapContext'
+import { MapContext } from './MapContext'
 
 export interface Coordinates {
   longitude: number

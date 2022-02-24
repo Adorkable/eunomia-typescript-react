@@ -1,7 +1,7 @@
 import { GeoJSON } from 'geojson'
 import { Expression, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl'
 import React, { useContext, useEffect, useState } from 'react'
-import { MapContext } from './Utility/MapContext'
+import { MapContext } from './MapContext'
 
 export interface Coordinates {
   longitude: number

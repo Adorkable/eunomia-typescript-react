@@ -10,7 +10,8 @@ import Line from './Line'
 import LocationInformationDialog from './LocationInformationDialog'
 import { MarkerMethods } from './Marker'
 import { MinMax } from './Utility/LngLat'
-import { MapContext } from './Utility/MapContext'
+
+import { MapContext } from './MapContext'
 
 interface Props {
   accessToken: string
@@ -53,7 +54,7 @@ export const Map = ({
   const [mapStyleIsLoaded, setMapStyleIsLoaded] = useState(false)
   const [mouseLocation, setMouseLocation] = useState<LngLat | undefined>()
   const [mouseLocationPause, setMouseLocationPause] = useState(false)
-  // const [markers, setMarkers] = useState<MarkersStore>({})
+
   // TODO: only allows for one instance of a map, fix for future usage
   mapboxgl.accessToken = accessToken
 
