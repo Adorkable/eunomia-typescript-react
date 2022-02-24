@@ -1,5 +1,6 @@
 import mapboxgl from 'mapbox-gl'
 import React, {
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -19,6 +20,8 @@ export interface Props {
   popup?: React.ReactElement | undefined
   // eslint-disable-next-line no-unused-vars
   onClick?: (event: MouseEvent) => void
+  mapboxMarkerRef?: (marker: RefObject<mapboxgl.Marker | undefined>) => void
+
   children?: React.ReactElement | undefined
 }
 
@@ -28,7 +31,13 @@ export interface MarkerMethods {
   getMapboxMarker: () => React.MutableRefObject<mapboxgl.Marker>
 }
 
-export const Marker = ({ location, popup, onClick, children }: Props) => {
+export const Marker = ({
+  location,
+  popup,
+  onClick,
+  mapboxMarkerRef,
+  children
+}: Props) => {
   const context = useContext(MapContext)
   const { map } = context
 
@@ -81,6 +90,9 @@ export const Marker = ({ location, popup, onClick, children }: Props) => {
       }
     }
 
+    if (mapboxMarkerRef) {
+      mapboxMarkerRef(mapboxMarker)
+    }
     return () => {
       if (!mapboxMarker.current) {
         return
