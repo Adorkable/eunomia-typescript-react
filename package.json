@@ -1,6 +1,6 @@
 {
   "name": "@adorkable/eunomia-typescript-react",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "The team's go-to utilities for Typescript and React, named for the Greek goddess of green pastures, law and legislation",
   "scripts": {
     "build": "rollup -c",
