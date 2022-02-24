@@ -34,6 +34,9 @@ interface Props {
     | undefined
 
   mapboxMapRef?: (marker: RefObject<mapboxgl.Map | undefined>) => void
+
+  onCenterChange?: (longitude: number, latitude: number) => void
+  onZoomChange?: (zoom: number) => void
 }
 
 export const Map = ({
@@ -47,7 +50,11 @@ export const Map = ({
   style = 'mapbox://styles/mapbox/streets-v11',
   showLocation = false,
   children,
-  mapboxMapRef
+
+  mapboxMapRef,
+
+  onCenterChange,
+  onZoomChange
 }: Props): React.ReactElement => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map: MutableRefObject<mapboxgl.Map | null> =
@@ -125,11 +132,23 @@ export const Map = ({
   }, [startingLongitude])
 
   useEffect(() => {
+    if (onCenterChange) {
+      onCenterChange(longitude, latitude)
+    }
+  }, [onCenterChange, longitude, latitude])
+
+  useEffect(() => {
     if (!map.current) {
       return
     }
     map.current.setZoom(startingZoom)
   }, [startingZoom])
+
+  useEffect(() => {
+    if (onZoomChange) {
+      onZoomChange(zoom)
+    }
+  }, [zoom, onZoomChange])
 
   useEffect(() => {
     if (!map.current) {
