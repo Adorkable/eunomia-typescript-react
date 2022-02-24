@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 
 import { Meta } from '@storybook/react/types-6-0'
 
 import { Map } from './Map'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { MinMax } from './Utility/LngLat'
 
 export default {
