@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react/types-6-0'
 import { useWindowSize } from './useWindowSize'
 
 export default {
-  title: 'Hooks/useWindowSize'
+  title: 'WindowSize/useWindowSize'
 } as Meta
 
 export const Default = () => {

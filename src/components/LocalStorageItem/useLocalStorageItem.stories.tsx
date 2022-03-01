@@ -5,7 +5,7 @@ import { Meta } from '@storybook/react/types-6-0'
 import { useLocalStorageItem } from './useLocalStorageItem'
 
 export default {
-  title: 'Hooks/useLocalStorageItem'
+  title: 'LocalStorageItem/useLocalStorageItem'
 } as Meta
 
 interface Props {

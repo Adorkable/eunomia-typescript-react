@@ -15,7 +15,7 @@ import {
 } from './Utility'
 
 import { WebGLRenderer, Vector2, Box2 } from 'three'
-import useWindowSize from '../Hooks/useWindowSize'
+import useWindowSize from '../WindowSize/useWindowSize'
 import { useWebGLRenderer } from './useWebGLRenderer'
 
 export type Props = {
