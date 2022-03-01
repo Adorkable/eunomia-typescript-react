@@ -63,7 +63,8 @@ export const createBounds2DGeometry = (bounds: Box2): Group => {
   return result
 }
 
-declare var setupThreejsDevTool: Function | void
+// eslint-disable-next-line @typescript-eslint/ban-types
+declare let setupThreejsDevTool: Function | void
 
 export const attachThreejsDevTool = (
   renderer: WebGLRenderer,

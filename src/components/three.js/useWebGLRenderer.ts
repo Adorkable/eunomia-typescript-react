@@ -9,10 +9,8 @@ export const useWebGLRenderer = (
   options?: WebGLRendererParameters
 ): WebGLRenderer | void => {
   const [renderer, setRenderer] = useState<WebGLRenderer | void>(undefined)
-  const [
-    rendererDomElement,
-    setRendererDomElement
-  ] = useState<HTMLCanvasElement | void>(undefined)
+  const [rendererDomElement, setRendererDomElement] =
+    useState<HTMLCanvasElement | void>(undefined)
 
   const attachRenderer = (container: HTMLElement) => {
     removeRenderer()

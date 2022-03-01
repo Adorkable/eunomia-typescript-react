@@ -14,14 +14,22 @@ export const clampLngLat = (
 ): LngLat => {
   let clampedLongitude: number
   if (longitudeMinMax) {
-    clampedLongitude = clamp(lngLat.lng, longitudeMinMax.minimum, longitudeMinMax.maximum)
+    clampedLongitude = clamp(
+      lngLat.lng,
+      longitudeMinMax.minimum,
+      longitudeMinMax.maximum
+    )
   } else {
     clampedLongitude = lngLat.lng
   }
 
   let clampedLatitude: number
   if (latitudeMinMax) {
-    clampedLatitude = clamp(lngLat.lat, latitudeMinMax.minimum, latitudeMinMax.maximum)
+    clampedLatitude = clamp(
+      lngLat.lat,
+      latitudeMinMax.minimum,
+      latitudeMinMax.maximum
+    )
   } else {
     clampedLatitude = lngLat.lat
   }
