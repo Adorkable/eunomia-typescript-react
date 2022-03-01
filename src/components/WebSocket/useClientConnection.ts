@@ -1,7 +1,11 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
+import { ConnectionClosedError } from './ConnectionClosedError'
 import { WebSocketError } from './WebSocketError'
 
-interface Props<T = any> {
+// TODO: support protocols and extensions
+
+export type DataType = string | ArrayBufferLike | Blob | ArrayBufferView
+interface Props<T = DataType> {
   url: string
 
   onOpen?: (connection: WebSocket | undefined, event: Event) => void
@@ -11,7 +15,7 @@ interface Props<T = any> {
 
   onMessage?: (
     connection: WebSocket | undefined,
-    message: MessageEvent<any>
+    message: MessageEvent<T>
   ) => void
 
   onMessageData?: (connection: WebSocket | undefined, data: T) => void
@@ -28,9 +32,13 @@ interface Props<T = any> {
   unmountCloseMessage?: string
 }
 
-export type Result = RefObject<WebSocket | undefined>
+interface Result {
+  send: (data: DataType) => void
+  readyState: () => number
+  close: (code?: number, reason?: string) => void
+}
 
-export const useClientConnection = <T = any>({
+export const useClientConnection = <T = DataType>({
   url,
 
   binaryType = 'arraybuffer',
@@ -132,7 +140,7 @@ export const useClientConnection = <T = any>({
   )
 
   const onmessage = useCallback(
-    (event: MessageEvent<any>) => {
+    (event: MessageEvent<T>) => {
       onmessageBasic(event)
       onmessageData(event)
       onmessageDataText(event)
@@ -154,6 +162,27 @@ export const useClientConnection = <T = any>({
     },
     [onError]
   )
+
+  const send = useCallback((data: DataType) => {
+    if (!connection.current) {
+      throw new ConnectionClosedError()
+    }
+    connection.current.send(data)
+  }, [])
+
+  const readyState = useCallback(() => {
+    if (!connection.current) {
+      return WebSocket.CLOSED
+    }
+    return connection.current.readyState
+  }, [])
+
+  const close = useCallback((code?: number, reason?: string) => {
+    if (!connection.current) {
+      throw new ConnectionClosedError()
+    }
+    connection.current.close(code, reason)
+  }, [])
 
   useEffect(() => {
     const result = new WebSocket(url)
@@ -183,5 +212,5 @@ export const useClientConnection = <T = any>({
     unmountCloseMessage
   ])
 
-  return connection
+  return { send, readyState, close }
 }

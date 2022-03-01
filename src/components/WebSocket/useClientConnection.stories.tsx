@@ -45,7 +45,7 @@ export const Default = ({ sendStringToServer, sendStringToClient }: Props) => {
     console.error(e)
   }
 
-  const clientConnection = useClientConnection({
+  const { send: clientSend } = useClientConnection({
     url,
     onMessageDataText: (_, data: string) => {
       setClientReceivedMessage(`string: '${data}'`)
@@ -59,7 +59,7 @@ export const Default = ({ sendStringToServer, sendStringToClient }: Props) => {
       <br />
       <button
         onClick={() => {
-          clientConnection.current.send(sendStringToServer)
+          clientSend(sendStringToServer)
         }}
       >
         Send String to Server

@@ -3,7 +3,7 @@ export class WebSocketError extends Error {
     private _connection: WebSocket | undefined,
     private _errorEvent: Event
   ) {
-    super('Invalid identify message')
+    super('WebSocket error')
   }
 
   get connection(): WebSocket | undefined {
