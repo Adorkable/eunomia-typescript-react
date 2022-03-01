@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { ConnectionClosedError } from './ConnectionClosedError'
 import { WebSocketError } from './WebSocketError'
 
@@ -59,6 +59,7 @@ export const useClientConnection = <T = DataType>({
   unmountCloseMessage = 'Browsing away'
 }: Props<T>): Result => {
   const connection = useRef<WebSocket | undefined>(undefined)
+  const [connectionCreated, setConnectionCreated] = useState(false)
 
   const onopen = useCallback(
     (event: Event) => {
@@ -189,28 +190,47 @@ export const useClientConnection = <T = DataType>({
 
     result.binaryType = binaryType
 
-    result.onopen = onopen
-    result.onclose = onclose
-    result.onmessage = onmessage
-    result.onerror = onerror
-
     connection.current = result
+
+    setConnectionCreated(true)
 
     return () => {
       if (!result || result.readyState === WebSocket.CLOSED) {
         return
       }
       result.close(1000, unmountCloseMessage)
+
+      setConnectionCreated(false)
     }
-  }, [
-    url,
-    binaryType,
-    onopen,
-    onclose,
-    onmessage,
-    onerror,
-    unmountCloseMessage
-  ])
+  }, [url, binaryType, setConnectionCreated, unmountCloseMessage])
+
+  useEffect(() => {
+    if (!connection.current) {
+      return
+    }
+    connection.current.onopen = onopen
+  }, [connectionCreated, onopen])
+
+  useEffect(() => {
+    if (!connection.current) {
+      return
+    }
+    connection.current.onclose = onclose
+  }, [connectionCreated, onclose])
+
+  useEffect(() => {
+    if (!connection.current) {
+      return
+    }
+    connection.current.onmessage = onmessage
+  }, [connectionCreated, onmessage])
+
+  useEffect(() => {
+    if (!connection.current) {
+      return
+    }
+    connection.current.onerror = onerror
+  }, [connectionCreated, onerror])
 
   return { send, readyState, close }
 }

@@ -15,6 +15,8 @@ interface Props {
   sendStringToClient: string
 }
 
+let server: Server | null = null
+
 export const Default = ({ sendStringToServer, sendStringToClient }: Props) => {
   const [clientReceivedMessage, setClientReceivedMessage] = useState('')
   const [serverReceivedMessage, setServerReceivedMessage] = useState('')
@@ -34,15 +36,16 @@ export const Default = ({ sendStringToServer, sendStringToClient }: Props) => {
     [setServerReceivedMessage]
   )
 
-  let server: Server | null = null
-  try {
-    server = new Server(url)
+  if (!server) {
+    try {
+      server = new Server(url)
 
-    server.on('connection', (socket) => {
-      socket.on('message', serverOnMessage)
-    })
-  } catch (e) {
-    console.error(e)
+      server.on('connection', (socket) => {
+        socket.on('message', serverOnMessage)
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const { send: clientSend } = useClientConnection({
