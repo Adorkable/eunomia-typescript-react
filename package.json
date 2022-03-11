@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages",
     "prepare": "npm run build",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
@@ -39,6 +40,7 @@
     "@storybook/addon-interactions": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
     "@storybook/react": "^6.4.19",
+    "@storybook/storybook-deployer": "^2.8.10",
     "@storybook/testing-library": "^0.0.9",
     "@types/mapbox-gl": "^2.6.1",
     "@types/react": "^17.0.39",
