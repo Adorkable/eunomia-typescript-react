@@ -11,7 +11,6 @@ export const useUserMedia = ({ constraints }: Props) => {
   const [isStreamSet, setIsStreamSet] = useState<boolean>(false) // Hack to force rerender with new reference returned
   const [error, setError] = useState<Error>()
 
-  console.log(stream)
   useEffect(() => {
     let cancelEnable = false
 
@@ -39,7 +38,6 @@ export const useUserMedia = ({ constraints }: Props) => {
   useEffect(() => {
     return () => {
       if (stream.current) {
-        console.log('stopping stream', stream.current)
         stopMediaStream(stream.current)
       }
     }
