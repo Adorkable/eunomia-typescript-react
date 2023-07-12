@@ -16,7 +16,7 @@ interface Props {
 
 export const Default = ({
   key,
-  defaultValue = 'value1',
+  defaultValue = '',
   localChangeCheckSeconds = 1
 }: Props) => {
   const currentValue = useLocalStorageItem({
