@@ -5,7 +5,7 @@ import { Methods, methods } from './Methods'
 
 export type { Methods } from './Methods'
 
-interface Props {
+export interface Props {
   width: number
   height: number
 
