@@ -1,15 +1,9 @@
-import * as React from 'react'
-
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
+import React from 'react'
 
-export interface Methods {
-  drawContext: (video: HTMLVideoElement) => void
-  clearContext: () => void
-  getContext: () => CanvasRenderingContext2D | null | undefined
+import { Methods, methods } from './Methods'
 
-  width: () => number
-  height: () => number
-}
+export type { Methods } from './Methods'
 
 interface Props {
   width: number
@@ -23,104 +17,60 @@ interface Props {
 
 export const Canvas = forwardRef<Methods, Props>(
   ({ width, height, flip = false, style, className }: Props, forwardedRef) => {
-    const ref = useRef<HTMLCanvasElement | null>()
-    const contextRef = useRef<CanvasRenderingContext2D | null>()
+    const canvas = useRef<HTMLCanvasElement>(null)
+    const renderContext = useRef<CanvasRenderingContext2D>()
 
     useEffect(() => {
-      if (!ref.current) {
+      if (!canvas.current) {
         return
       }
-      ref.current.width = width
-    }, [ref, width])
+      canvas.current.width = width
+    }, [width])
 
     useEffect(() => {
-      if (!ref.current) {
+      if (!canvas.current) {
         return
       }
-      ref.current.height = height
-    }, [ref, height])
+      canvas.current.height = height
+    }, [height])
 
     useEffect(() => {
-      if (!contextRef.current) {
+      if (!renderContext.current) {
         return
       }
       if (flip) {
-        contextRef.current.translate(width, 0) //result.video.videoWidth, 0)
-        contextRef.current.scale(-1, 1)
+        renderContext.current.translate(width, 0) //result.video.videoWidth, 0)
+        renderContext.current.scale(-1, 1)
       }
       return () => {
-        if (!contextRef.current) {
+        if (!renderContext.current) {
           return
         }
         if (flip) {
-          contextRef.current.scale(1, 1)
-          contextRef.current.translate(-width, 0) //result.video.videoWidth, 0)
+          renderContext.current.scale(1, 1)
+          renderContext.current.translate(-width, 0) //result.video.videoWidth, 0)
         }
       }
-    }, [ref, width, flip])
+    }, [flip, width])
 
     useEffect(() => {
-      if (!ref.current) {
+      if (!canvas.current) {
         return
       }
       // TODO: support configurable context
-      contextRef.current = ref.current.getContext('2d')
+      renderContext.current = canvas.current.getContext('2d') || undefined
 
       return () => {
-        contextRef.current = null
+        renderContext.current = undefined
       }
-    }, [ref])
+    }, [])
 
-    useImperativeHandle(forwardedRef, () => ({
-      drawContext: (video: HTMLVideoElement) => {
-        if (!contextRef.current) {
-          return
-        }
-        contextRef.current.drawImage(
-          video,
-          0,
-          0,
-          video.videoWidth,
-          video.videoHeight
-        )
-      },
-      clearContext: () => {
-        if (!ref.current || !contextRef.current) {
-          return
-        }
-        contextRef.current.clearRect(
-          0,
-          0,
-          ref.current.width,
-          ref.current.height
-        )
-      },
-      getContext: () => {
-        return contextRef.current
-      },
-      width: () => {
-        if (!ref.current) {
-          return 0
-        }
-        return ref.current.width
-      },
-      height: () => {
-        if (!ref.current) {
-          return 0
-        }
-        return ref.current.height
-      }
-    }))
+    useImperativeHandle(forwardedRef, methods(canvas, renderContext), [
+      canvas,
+      renderContext
+    ])
 
-    return (
-      <canvas
-        ref={(newRef) => {
-          ref.current = newRef
-        }}
-        style={style}
-        className={className}
-      />
-    )
+    return <canvas ref={canvas} style={style} className={className} />
   }
 )
 Canvas.displayName = 'Canvas'

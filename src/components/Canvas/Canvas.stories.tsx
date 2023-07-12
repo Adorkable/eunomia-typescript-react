@@ -1,9 +1,11 @@
+import { Meta } from '@storybook/react'
 import * as React from 'react'
 import { useCallback, useRef } from 'react'
 
-import { Canvas, Methods as CanvasMethods } from './Canvas'
+import { Canvas } from './Canvas'
+import { Methods as CanvasMethods } from './Methods'
 
-const displayConfig = {
+const displayConfig: Meta = {
   title: 'Canvas'
 }
 export default displayConfig
@@ -16,10 +18,10 @@ interface Props {
 }
 
 export const Default = ({ width, height, flip }: Props) => {
-  const canvas = useRef<CanvasMethods | null>()
+  const canvas = useRef<CanvasMethods>(null)
 
-  const draw = useCallback(() => {
-    if (!canvas || !canvas.current) {
+  const handleClickDraw = useCallback(() => {
+    if (!canvas.current) {
       return
     }
     const context = canvas.current.getContext()
@@ -38,24 +40,33 @@ export const Default = ({ width, height, flip }: Props) => {
 
     context.fillStyle = gradient
     context.fillRect(0, 0, canvas.current.width(), canvas.current.height())
-  }, [])
+  }, [width, height])
 
   // const drawIntoVideo = useCallback(() => {
   // }, [])
 
   return (
-    <div>
-      <Canvas
-        ref={(ref) => (canvas.current = ref)}
-        width={width}
-        height={height}
-        flip={flip}
-      />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+      }}
+    >
+      <div
+        style={{
+          border: '1px solid black',
+          margin: 0,
+          padding: 0,
+          width,
+          height
+        }}
+      >
+        <Canvas ref={canvas} width={width} height={height} flip={flip} />
+      </div>
       <br />
-      Width: {canvas.current?.width()} Height: {canvas.current?.height()}
-      <br />
-      <button onClick={draw}>Draw</button>
-      <button onClick={() => canvas.current?.clearContext()}>Clear</button>
+      <button onClick={handleClickDraw}>Draw</button>
+      <button onClick={() => canvas.current?.clear()}>Clear</button>
     </div>
   )
 }
