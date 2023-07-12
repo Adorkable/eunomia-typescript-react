@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
-import { Meta } from '@storybook/react/types-6-0'
+import { Meta } from '@storybook/react'
 
 import { useClientConnection } from './useClientConnection'
 
@@ -70,6 +70,9 @@ export const Default = ({ sendStringToServer, sendStringToClient }: Props) => {
 
       <button
         onClick={() => {
+          if (!server) {
+            throw new Error('Server not initialized')
+          }
           server.emit('message', sendStringToClient)
         }}
       >

@@ -5,10 +5,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react', '@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
-  ],
+  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'plugin:storybook/recommended'],
   root: true,
   env: {
     browser: true
@@ -20,4 +17,4 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off'
   }
-}
+};

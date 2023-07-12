@@ -1,4 +1,4 @@
-import mapboxgl, { LngLat } from 'mapbox-gl'
+import mapboxgl, { LngLat, MapMouseEvent } from 'mapbox-gl'
 import React, {
   MutableRefObject,
   RefObject,
@@ -165,7 +165,7 @@ export const Map = ({
   }, [zoomMinMax])
 
   const onMouseMove = useCallback(
-    (event) => {
+    (event: MapMouseEvent) => {
       if (mouseLocationPause) {
         return
       }

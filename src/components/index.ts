@@ -1,8 +1,10 @@
-export { Canvas, Methods as CanvasMethods } from './Canvas'
+export { Canvas } from './Canvas'
+export type { Methods as CanvasMethods } from './Canvas'
 export * from './LocalStorageItem'
 export * from './RequestAnimationFrame'
 export * from './UserMedia'
-export { Video, Methods as VideoMethods } from './Video'
+export { Video } from './Video'
+export type { Methods as VideoMethods } from './Video'
 export * as WebSocket from './WebSocket'
 export * from './WindowSize'
 

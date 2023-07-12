@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Meta } from '@storybook/react/types-6-0'
+import { Meta } from '@storybook/react'
 
 import { useLocalStorageItem } from './useLocalStorageItem'
 
@@ -10,14 +10,14 @@ export default {
 
 interface Props {
   key: string
-  defaultValue?: string | null
-  localChangeCheckSeconds?: number | undefined
+  defaultValue?: string
+  localChangeCheckSeconds?: number
 }
 
 export const Default = ({
   key,
-  defaultValue,
-  localChangeCheckSeconds
+  defaultValue = 'value1',
+  localChangeCheckSeconds = 1
 }: Props) => {
   const currentValue = useLocalStorageItem({
     key,
@@ -53,9 +53,4 @@ export const Default = ({
       </button>
     </>
   )
-}
-Default.args = {
-  key: 'item1',
-  defaultValue: 'value1',
-  localChangeCheckSeconds: 1
 }
